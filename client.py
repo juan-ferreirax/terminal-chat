@@ -5,13 +5,14 @@ SERVER_PORT = int(input("Informe a porta definida pelo receptor: "))
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_socket.connect((SERVER_ADDRESS, SERVER_PORT))
-print("Conexão estabelecida com sucesso!")
-
+print(f"""Conexão estabelecida com sucesso!
+Endereço do servidor: {SERVER_ADDRESS}
+Porta: {SERVER_PORT}""")
 
 try:
     while True:
-        message = input("Digite a mensagem a ser enviada: ")
-        if message == "sair":
+        message = input("Mensagem: ")
+        if message == "q":
             break
         else:
             client_socket.sendall(message.encode("utf-8"))
