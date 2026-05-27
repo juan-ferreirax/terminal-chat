@@ -20,7 +20,7 @@ try:
             client_socket.sendall(message.encode("utf-8"))
             sys.stdout.write(f"\033[F\033[K{message} ✅️\n")
             sys.stdout.flush()
-except TimeoutError:
+except socket.timeout:
     print("Erro de timeout")
 except Exception as e:
     print(e)
