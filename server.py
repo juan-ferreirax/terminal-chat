@@ -8,11 +8,20 @@ server_socket.bind((IP_ADDRESS, PORT))
 server_socket.listen()
 print(f"Servidor ouvindo na porta {PORT}...")
 
-connection, address = server_socket.accept()
-print("Conexão estabelecida com sucesso! Aguardando mensagem...")
+while True:
+    connection, address = server_socket.accept()
+    print("Conexão estabelecida com sucesso! Aguardando mensagem...")
 
-data = connection.recv(1024).decode("utf-8")
-print(data)
+    try:
+        while True:
+            data = connection.recv(1024)
+            if not data:
+                break
 
-server_socket.close()
+            print(data.decode("utf-8"))
+    except Exception as e:
+        print(e)
+    finally:
+        connection.close()
+        print("O cliente encerrou a conexão!")
 
