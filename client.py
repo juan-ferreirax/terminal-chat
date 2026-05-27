@@ -7,6 +7,18 @@ client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_socket.connect((SERVER_ADDRESS, SERVER_PORT))
 print("Conexão estabelecida com sucesso!")
 
-message = input("Digite a mensagem a ser enviada: ")
-client_socket.sendall(message.encode("utf-8"))
-client_socket.close()
+
+try:
+    while True:
+        message = input("Digite a mensagem a ser enviada: ")
+        if message == "sair":
+            break
+        else:
+            client_socket.sendall(message.encode("utf-8"))
+except TimeoutError:
+    print("Erro de timeout")
+except Exception as e:
+    print(e)
+finally:
+    client_socket.close()
+    print("A conexão foi encerrada com o receptor!")
