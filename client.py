@@ -1,4 +1,5 @@
 import socket
+import sys
 
 SERVER_ADDRESS = input("Informe o endereço IP do receptor: ")
 SERVER_PORT = int(input("Informe a porta definida pelo receptor: "))
@@ -13,9 +14,9 @@ Porta: {SERVER_PORT}""")
 try:
     while True:
         message = input("Mensagem: ")
-        if message == "q":
+        if message.strip().lower() == "q":
             break
-        else:
+        elif message:
             client_socket.sendall(message.encode("utf-8"))
 except TimeoutError:
     print("Erro de timeout")
