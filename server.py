@@ -10,8 +10,12 @@ print(f"Servidor ouvindo na porta {PORT}...")
 
 while True:
     connection, address = server_socket.accept()
-    print("Conexão estabelecida com sucesso! Aguardando mensagem...")
-
+    client_ip, client_port = address
+    print(f"""Conexão estabelecida com sucesso!
+Endereço IP do emissor: {client_ip}
+Porta do emissor: {client_port}
+Aguardando mensagens...\n"""
+    )
     try:
         while True:
             data = connection.recv(1024)
@@ -23,5 +27,6 @@ while True:
         print(e)
     finally:
         connection.close()
-        print("O cliente encerrou a conexão!")
+        print(f"O emissor com o socket {client_ip}:{client_port} encerrou a conexão!")
+        print(f"Aguardando por uma nova conexão na porta {PORT}...\n")
 
