@@ -6,7 +6,7 @@ PORT = int(input("Informe uma porta(1024 a 65535): "))
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.bind((IP_ADDRESS, PORT))
 server_socket.listen()
-print(f"Servidor ouvindo na porta {PORT}...")
+print(f"Servidor ouvindo na porta {PORT}...", flush=True)
 
 while True:
     connection, address = server_socket.accept()
@@ -14,7 +14,7 @@ while True:
     print(f"""Conexão estabelecida com sucesso!
 Endereço IP do emissor: {client_ip}
 Porta do emissor: {client_port}
-Aguardando mensagens...\n"""
+Aguardando mensagens...\n""", flush=True
     )
     try:
         while True:
@@ -22,11 +22,11 @@ Aguardando mensagens...\n"""
             if not data:
                 break
 
-            print(data.decode("utf-8"))
+            print(data.decode("utf-8"), flush=True)
     except Exception as e:
-        print(e)
+        print(e, flush=True)
     finally:
         connection.close()
-        print(f"O emissor com o socket {client_ip}:{client_port} encerrou a conexão!")
-        print(f"Aguardando por uma nova conexão na porta {PORT}...\n")
+        print(f"O emissor com o socket {client_ip}:{client_port} encerrou a conexão!", flush=True)
+        print(f"Aguardando por uma nova conexão na porta {PORT}...\n", flush=True)
 
