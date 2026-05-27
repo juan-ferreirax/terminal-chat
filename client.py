@@ -4,9 +4,10 @@ SERVER_ADDRESS = input("Informe o endereço IP do receptor: ")
 SERVER_PORT = int(input("Informe a porta definida pelo receptor: "))
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 client_socket.connect((SERVER_ADDRESS, SERVER_PORT))
 print(f"""Conexão estabelecida com sucesso!
-Endereço do servidor: {SERVER_ADDRESS}
+Endereço do receptor: {SERVER_ADDRESS}
 Porta: {SERVER_PORT}""")
 
 try:
